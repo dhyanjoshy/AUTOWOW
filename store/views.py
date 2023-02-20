@@ -22,3 +22,7 @@ def single_product(request,product_id):
     color=Color.objects.filter(product__product_id=product_id)
     varient=Varient.objects.filter(product__product_id=product_id)
     return render(request,"store/single_product.html",{"product":product,"cat":category,"color":color,"varient":varient})
+
+def loan_calculator(request):
+    category=Category.objects.all()
+    return render(request,"store/loan_calculator.html",{"cat":category})

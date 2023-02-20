@@ -133,7 +133,7 @@
             <div class="container">
               <br>
               <a href="{% url 'single_product' product.product_id %}#user-info" class="btn btn-outline-success scrollto button">Need a call?</a>
-              <a href="#" class="btn btn-outline-success scrollto button">Loan calculator</a>
+              <a href="{% url 'loan_calculator' %}" class="btn btn-outline-success scrollto button">Loan calculator</a>
 
             </div>
             
@@ -215,67 +215,6 @@
     </section>
 
 <!-- end  user information form -->
-<!-- loan form -->
-<section id="user-info">
-  <div class="limiter">
-    <div class="container-login1000">
-      <div class="wrap-login100">
-        <div class="login100-pic js-tilt" data-tilt>
-          <img src="{% static 'assets/login/images/money.png' %}" alt="IMG">
-        </div>
-
-        <form class="login100-form validate-form">
-          <span class="login100-form-title">
-            Loan calculator
-          </span>
-          
-          <!-- Firstname -->
-
-          <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" name="fname" placeholder="Loan Amount" id="loanAmount">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-money" aria-hidden="true"></i>
-            </span>
-          </div>
-          <!-- Lastname -->
-
-          <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" name="lname" placeholder="Interest Rate" id="interestRate">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-percent" aria-hidden="true"></i>
-            </span>
-          </div>
-
-          <!-- email -->
-
-          <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" name="lname" placeholder="Loan Term" id="loanTerm">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i aria="hidden" class="bi bi-calendar-event"></i>
-            </span>
-          </div>
-
-          
-          <div class="container-login100-form-btn" >
-            <button class="login100-form-btn" id="calculateBtn">
-              Submit
-            </button>
-          </div>
-
-          <div class="text-center p-t-136">
-            <h6 >Amount to be payed monthly</h6>
-            <h1 id="monthlyPayment">
-              
-            </h1>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 
