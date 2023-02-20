@@ -1,0 +1,282 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}
+  AutoWow: Products
+{% endblock %}
+
+
+{% block content %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'assets/login/css/main.css'%} ">
+<style>
+  .card{
+    border:none;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition:.5s;
+  }
+  .card:hover{
+    box-shadow: #ffbc4879 0px 7px 29px 0px;
+  }
+  .image{
+    padding: 10px;
+    border-radius: 20px;
+
+  }
+  .var{
+    transition: .5s;
+  }
+  .var:hover{
+    background-color: #f5f5f5;
+  }
+  .var .var-btn{
+    text-decoration: none;
+    font-family: "Poppins";
+    color:rgb(45, 45, 45)
+  }
+  .button{
+    border-radius: 60px;
+  }
+  .button:hover{
+    border-radius: 100px;
+  }
+  .change-btn{
+    color:rgb(88, 88, 88)
+  }
+  .mnimg{
+    border-radius: 1rem;
+    transition: .5s;
+  }
+  .imgButton{
+    transition: opacity 0.5s ease;
+  }
+  .price{
+    transition: opacity 0.5s ease;
+  }
+</style>
+    
+    <!-- Product section-->
+    <section id="product" class="py-5">
+      <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+          <div class="col-md-6">
+            <img
+            id="main-image"
+              class="card-img-top mb-5 mb-md-0 mnimg"
+              src="{{ product.image.url }}"
+              alt="{{ product.image }}"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="small mb-1">Product Id : {{product.product_id}}</div>
+            <h1 class="display-5 fw-bolder">{{product.title}}</h1>
+            <div class="fs-5 mb-5">
+              <h5>{{product.brand}}</h5>
+            </div>
+            <p class="lead">
+              {{product.description}}
+            </p>
+            <br>
+            <h4>Colors</h4>
+
+            <!-- card for colors -->
+
+            <div class="row">
+              {% for color in color %}
+              <div class="col-sm-4" style="padding-top:10px;">
+                <a >
+                <div class="card" style="width: 10rem; " data="{{ color.image.url }}">
+                  <img
+                    src="{{ color.image.url }}"
+                    class="card-img-top image imgButton"
+                    alt="..."
+                    data="{{ color.image.url }}"
+                  />
+                  <div class="card-body" data="{{ color.image.url }}">
+                    <h6 class="card-title" data="{{ color.image.url }}">{{color.title}}</h6>
+                  </div>
+                </div>
+              </a>
+              </div>
+              {% endfor %}
+            </div>
+
+              <!-- end of 1 -->
+            
+            
+
+            <!-- end card for colors -->
+            <br>
+            <h4>Varients</h4>
+            <!-- card for varients -->
+
+            <ul class="list-group list-group-horizontal">
+              {% for varient in varient %}
+              <li class="list-group-item var"><button type="button" data="{{varient.price}}" class="btn btn-link var-btn"  id="var-btn"data-mdb-ripple-color="dark">{{varient.title}}</button></li>
+              {% endfor %}
+            </ul>
+            <!-- end for varients -->
+
+            <!-- price -->
+
+            <div class="container">
+              <br><br>
+              <h6>Prize:</h6>
+              <h1 id="price">₹ ( Click varient )</h1>
+            </div> 
+
+            <!-- end price-->
+
+            <!-- buttons -->
+            <div class="container">
+              <br>
+              <a href="{% url 'single_product' product.product_id %}#user-info" class="btn btn-outline-success scrollto button">Need a call?</a>
+              <a href="#" class="btn btn-outline-success scrollto button">Loan calculator</a>
+
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- user information form -->
+
+    <section id="user-info">
+      <div class="limiter">
+        <div class="container-login100">
+          <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+              <img src="{% static 'assets/login/images/img-01.png' %}" alt="IMG">
+            </div>
+    
+            <form class="login100-form validate-form">
+              <span class="login100-form-title">
+                Need a call?
+              </span>
+              
+              <!-- Firstname -->
+
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" name="fname" placeholder="Firstname">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+              </div>
+              <!-- Lastname -->
+
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" name="lname" placeholder="Lastname">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <!-- email -->
+
+              <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <input class="input100" type="text" name="email" placeholder="Email">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+
+               <!-- email -->
+
+               <div class="wrap-input100 validate-input" data-validate = "Phone Number">
+                <input class="input100" type="number" name="phone" placeholder="Phone">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </span>
+              </div>
+              
+              <div class="container-login100-form-btn">
+                <button class="login100-form-btn">
+                  Submit
+                </button>
+              </div>
+    
+              <div class="text-center p-t-136">
+                <p>
+                  Thankyou for trusting us !
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- end  user information form -->
+<!-- loan form -->
+<section id="user-info">
+  <div class="limiter">
+    <div class="container-login1000">
+      <div class="wrap-login100">
+        <div class="login100-pic js-tilt" data-tilt>
+          <img src="{% static 'assets/login/images/money.png' %}" alt="IMG">
+        </div>
+
+        <form class="login100-form validate-form">
+          <span class="login100-form-title">
+            Loan calculator
+          </span>
+          
+          <!-- Firstname -->
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" name="fname" placeholder="Loan Amount" id="loanAmount">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-money" aria-hidden="true"></i>
+            </span>
+          </div>
+          <!-- Lastname -->
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" name="lname" placeholder="Interest Rate" id="interestRate">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-percent" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <!-- email -->
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" name="lname" placeholder="Loan Term" id="loanTerm">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i aria="hidden" class="bi bi-calendar-event"></i>
+            </span>
+          </div>
+
+          
+          <div class="container-login100-form-btn" >
+            <button class="login100-form-btn" id="calculateBtn">
+              Submit
+            </button>
+          </div>
+
+          <div class="text-center p-t-136">
+            <h6 >Amount to be payed monthly</h6>
+            <h1 id="monthlyPayment">
+              
+            </h1>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

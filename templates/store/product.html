@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+AutoWow: Products
+{% endblock %}
+
+
+{% block content %}
+<style>
+  .card{
+    border: none;
+    border-radius: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition: .5s;
+  }
+  .card:hover{
+    box-shadow: #ffbc4879 0px 7px 29px 0px;
+  }
+  .card h5{
+    font-family: "Poppins";
+  }
+  .image{
+    padding:20px;
+    border-radius: 40px;
+    height:auto;
+    object-fit: contain;
+  }
+  .text-card{
+    padding:20px;
+  }
+  .anc{
+    text-decoration: none;
+    color: rgb(152, 152, 152);
+    transition: .2s;
+  }
+  .anc:hover{
+      color:black;
+  }
+  .arrow-down{
+    animation-name: arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  @keyframes arrow {
+    0%,100%   {transform: translateY(0px);}
+    50%  {transform: translateY(30px);}
+  }
+</style>
+<section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 ">
+          <h1>AutoWow!</h1>
+          <h2>We are here to help you chose your dream ride.</h2>
+          <p>Welcome to our car selling website. We offer a vast selection of top-quality vehicles, thoroughly inspected and tested for quality and performance. Our knowledgeable sales staff is always on hand to assist you in finding the perfect car for you. Browse our website today and find your dream car.</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center arrow-down">
+            <a href="#products"><h2 class="anim">Swipe Down!!</h2><br></a>
+            <i class="ri-arrow-down-line arrow_down" style="font-size:2rem; "></i>
+        </div>
+    </div>
+  </section>
+
+<section id="products" class="d-flex flex-column justify-content-center">
+    <div class="container">
+        <h2>Products</h2><br>
+      </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-4 g-4">
+          {% for item in product %}
+          <a class="anc" href="{% url 'single_product' item.product_id %}">
+            <div class="col">
+              <div class="card">
+                <img src="{{ item.image.url }}" class="card-img-top image"
+                  alt="{{item.image}}" />
+                <div class="card-body text-card">
+                  <h5 class="card-title">{{item.title}}</h5><br>
+                  <h6 class="card-title">Brand :{{item.brand}}</h6>
+                  <p class="card-text">
+                    {{item.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+            {% endfor %}
+          </div>
+    </div>
+</section>
+{% endblock %}

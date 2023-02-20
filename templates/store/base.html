@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %}
+    {% endblock %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Open+Sans&family=Poppins:ital,wght@0,200;0,600;1,100;1,200&family=Raleway:wght@300&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: KnightOne - v4.10.0
+  * Template URL: https://bootstrapmade.com/knight-simple-one-page-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <!-- connections for login page -->
+
+<link rel="stylesheet" type="text/css" href="{% static 'assets/login/css/main.css'%} ">
+</head>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top bg-dark">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center">
+        <div class="col-xl-9 d-flex align-items-center justify-content-lg-between">
+          <h1 class="logo me-auto me-lg-0"><a style="font-size: 1.5rem;" href="{% url 'home' %}#hero">AutoWow!</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="nav-link scrollto" href="{% url 'home' %}#hero ">Home</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'home' %}#about ">About</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'home' %}#services">Features</a></li>
+              <li class="dropdown"><a href="#"><span>Vehicles</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                {% for item in cat %}
+                  <li><a href="{% url 'brand' item.title %}#products">{{item.title}}</a></li>
+                {% endfor %}
+                </ul>
+              </li>
+              <li><a class="nav-link scrollto" href="{% url 'home' %}#contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+
+          <a href="#about" class="get-started-btn scrollto">Are you a dealer?</a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+    <!-- Navigation-->
+    {% block content %}
+    {% endblock %}
+
+</footer><!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="{% static 'assets/js/single_product.js' %}"></script>
+
+<!-- scripts for login page -->
+
+<script src="{% static 'assets/login/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'assets/login/vendor/bootstrap/js/popper.js'%}"></script>
+  <script src="{% static 'assets/login/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'assets/login/vendor/select2/select2.min.js'%}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'assets/login/vendor/tilt/tilt.jquery.min.js'%}"></script>
+  <script >
+      $('.js-tilt').tilt({
+          scale: 1.1
+      })
+  </script>
+<!--===============================================================================================-->
+  <script src="{% static 'assets/login/js/main.js'%}"></script>
+
+</body>
+
+</html>
