@@ -8,5 +8,5 @@ class DealerAdmin(admin.ModelAdmin):
     list_display=['user','dealer','address_line1','address_line2']
 
 @admin.register(Customer)
-class CustomerrAdmin(admin.ModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     list_display=['fname','lname','email','phone_number']

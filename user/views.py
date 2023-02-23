@@ -7,6 +7,19 @@ from django.contrib.auth import authenticate, login as auth_login ,logout as aut
 from store.views import home
 
 # Create your views here.
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = True
+            user.save()
+            return redirect('/user/login')
+    else:
+        form = SignUpForm().error_messages()
+    cat=Category.objects.all()
+    return render(request,"user/signup_page.html",{'cat':cat,'forms':form})
+
 def login(request):
     form=Dealerform()
     if request.method == 'POST':
