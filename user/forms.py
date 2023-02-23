@@ -1,13 +1,14 @@
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, required=True, help_text='Required. Enter a valid email address.')
+
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
+    email = forms.EmailField(max_length=254, required=True, help_text='Required. Enter a valid email address.')
 
     class Meta:
         model = User
@@ -22,12 +23,5 @@ class SignUpForm(UserCreationForm):
             'password2':forms.PasswordInput(attrs={'class':'form-control','id':'password2','name':'password2'}),
         }
 
-class Dealerform(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('username','password')
+    
 
-        widgets = {
-            'username':forms.TextInput(attrs={'class':'form-control','id':'username','name':'username'}),
-            'password':forms.PasswordInput(attrs={'class':'form-control','id':'password','name':'password'}),
-        }
