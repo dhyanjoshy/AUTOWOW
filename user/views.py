@@ -14,7 +14,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
             return redirect('/user/login')
     else:
@@ -37,7 +37,7 @@ def login(request):
             else:
                 return HttpResponse("Complete profile")
         else:
-            messages.error(request, 'Invalid form submission!!!')
+            messages.error(request, 'Username or password is incorrect !')
     cat=Category.objects.all()
     return render(request,"user/login_page.html",{'cat':cat})
 

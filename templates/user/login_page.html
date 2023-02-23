@@ -1,29 +1,120 @@
 {% extends 'store/base.html' %}
 {% load static %}
+{% block title %}
+  Dealer Login
+{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">{{ title }}</div>
-        <div class="card-body">
-          <form method="post">
-            {% if messages %}
-              <ul class="messages">
-                  {% for message in messages %}
-                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                  {% endfor %}
-              </ul>
-              {% endif %}
-            {% csrf_token %}
-                <input type ="text" placeholder="Username" name="username">
-                <input type ="password" placeholder="Password" name="password">
-                <button type="submit" class="btn btn-primary">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<head>
+  <link rel="icon" type="image/png" href="{% static 'user/log_assets/images/icons/favicon.ico'%}">
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="{% static 'user/log_assets/images/icons/favicon.ico'%}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/bootstrap/css/bootstrap.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/fonts/iconic/css/material-design-iconic-font.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/animate/animate.css'%}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/css-hamburgers/hamburgers.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/animsition/css/animsition.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/select2/select2.min.css'%}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/vendor/daterangepicker/daterangepicker.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'user/log_assets/css/main.css'%}">
+<!--===============================================================================================-->
+</head>
+
+
+
+
+<section id="login">
+	<br><br>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-color:white;">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="POST">
+          {% csrf_token %}
+          
+					<span class="login100-form-title p-b-26">
+						Welcome
+					</span>
+					<span class="login100-form-title p-b-48">
+						<i class="zmdi zmdi-font"></i>
+					</span>
+          {% if messages %}
+          <div class="alert alert-danger" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          <br>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter Valid Username">
+						<input class="input100" type="text" name="username">
+						<span class="focus-input100" data-placeholder="Username"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+					</div>
+
+					<div class="text-center p-t-115">
+						<span class="txt1">
+							Don't have an account?
+						</span>
+
+						<a class="txt2" href="{% url 'signup' %}">
+							Sign Up
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/animsition/js/animsition.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/bootstrap/js/popper.js'%}"></script>
+	<script src="{% static 'user/log_assets/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/select2/select2.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/daterangepicker/moment.min.js'%}"></script>
+	<script src="{% static 'user/log_assets/vendor/daterangepicker/daterangepicker.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/vendor/countdowntime/countdowntime.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'user/log_assets/js/main.js'%}"></script>
+
+</section>
 {% endblock %}
