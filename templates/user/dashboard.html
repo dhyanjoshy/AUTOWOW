@@ -5,6 +5,8 @@
   	<title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
@@ -23,9 +25,6 @@
         </div>
 				<div class="p-4">
 		  		<h1><a href="{% url 'dash_home' %}" class="logo">{{user.first_name}} {{user.last_name}} <span>{{user.dealer}}</span></a></h1>
-                <p class="paragraph">{{user.dealer.address_line1}}</p>
-                <p class="paragraph">{{user.dealer.address_line2}}</p>
-                <p class="paragraph">{{user.dealer.address_line3}}</p>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
 	            <a href="{% url 'dash_home' %}"><span class="fa fa-home mr-3"></span> Home</a>
@@ -37,28 +36,22 @@
               <a href="#"><span class="fa fa-car mr-3"></span> Your Products</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-car mr-3"></span> Add Product</a>
+              <a href="#"><span class="fa fa-plus mr-3"></span> Add Product</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-dollar mr-3"></span> Add Brand</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-cogs mr-3"></span> Services</a>
+              <a href="#"><span class="fa fa-plus mr-3"></span> Add Brand</a>
 	          </li>
 	          <li>
               <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
 	          </li>
+              <li>
+                <a href="{% url 'logout' %}"><span class="fa fa-sign-out mr-3"></span> Logout</a>
+                </li>
 	        </ul>
 
 	        <div class="mb-5">
-						<h3 class="h6 mb-3">Subscribe for newsletter</h3>
-						<form action="#" class="subscribe-form">
-	            <div class="form-group d-flex">
-	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-	              <input type="text" class="form-control" placeholder="Enter Email Address">
-	            </div>
-	          </form>
-					</div>
+                
+			</div>
 
 	        <div class="footer">
 	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

@@ -26,14 +26,13 @@ def login(request):
     if request.method == 'POST':
         
         username=request.POST.get('username')
-        password=request.POST.get('password')
-        print("test")    
+        password=request.POST.get('password')    
         user=authenticate(request,username=username,password=password)
         if user is not None:
             auth_login(request, user)            
             has_profile = hasattr(user, 'dealer')
             if has_profile:
-                return redirect('/user/dashboard')
+                return redirect('/user/dash_home')
             else:
                 return redirect('/user/dealerdetails')
         else:
@@ -72,7 +71,7 @@ def dash_home(request):
     username=request.user.username
     user = get_object_or_404(User, username=username)
     cat=Category.objects.all()
-    return render(request,"user/dashboard.html",{'cat':cat,'user':user})
+    return render(request,"user/dash_home.html",{'cat':cat,'user':user})
 
 def logout(request):
     auth_logout(request)

@@ -1,0 +1,22 @@
+{% extends 'user/dashboard.html' %}
+{% block title %}
+    Dashboard:Home
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="container">
+                <div class="containeralert alert-success">
+                    <h5>Welcome,</h5>
+                    <h2>{{user.first_name}} {{user.last_name}}</h2>
+                </div>
+            </div>
+            <div class="container">
+                <h6 class="paragraph">{{user.dealer.address_line1}}</h6>
+                <h6 class="paragraph">{{user.dealer.address_line2}}</h6>
+                <h6 class="paragraph">{{user.dealer.address_line3}}</h6>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
