@@ -22,3 +22,28 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+
+class DealerForm(forms.ModelForm):
+    user = forms.ModelChoiceField(queryset=User.objects.all())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['user'].required = True
+        self.fields['user'].widget.attrs['required'] = True
+        self.fields['user'].widget.attrs['class'] = 'input100'
+        self.fields['user'].widget.attrs['id'] = 'selectUser'
+        self.fields['user'].widget.choices = self.fields['user'].choices
+        self.fields['dealer'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'dealer'})
+        self.fields['address_line1'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'address_line1'})
+        self.fields['address_line2'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'address_line2'})
+        self.fields['address_line3'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'address_line3'})
+        self.fields['location'].widget = forms.URLInput(attrs={'class': 'input100', 'name': 'location'})
+        self.fields['phone_number1'].widget = forms.NumberInput(attrs={'class': 'input100', 'name': 'phone_number1'})
+        self.fields['phone_number2'].widget = forms.NumberInput(attrs={'class': 'input100', 'name': 'phone_number2'})
+
+    class Meta:
+        model = Dealer
+        fields = ('user','dealer','address_line1','address_line2','address_line3','location','phone_number1','phone_number2')
+
+            

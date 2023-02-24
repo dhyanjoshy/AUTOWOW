@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.http import JsonResponse
 from store.models import Category
 from .forms import *
@@ -30,12 +30,12 @@ def login(request):
         print("test")    
         user=authenticate(request,username=username,password=password)
         if user is not None:
+            auth_login(request, user)            
             has_profile = hasattr(user, 'dealer')
             if has_profile:
-                auth_login(request, user)
                 return redirect('/user/dashboard')
             else:
-                return HttpResponse("Complete profile")
+                return redirect('/user/dealerdetails')
         else:
             messages.error(request, 'Username or password is incorrect !')
     cat=Category.objects.all()
@@ -44,10 +44,35 @@ def login(request):
 
     
 
+def dealerdetails(request):
+    if request.method == 'POST':
+        form = DealerForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+            except:
+                return HttpResponse(request, 'Some error!')
+            return redirect('/user/login')
+    else:
+        form = DealerForm()
+
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    return render(request,"user/dealerform.html",{'cat':cat,'username':user,'form':form})
 
 
 def dashboard(request):
-    return render(request,"user/dashboard.html")
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    return render(request,"user/dashboard.html",{'cat':cat,'user':user})
+
+def dash_home(request):
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    return render(request,"user/dashboard.html",{'cat':cat,'user':user})
 
 def logout(request):
     auth_logout(request)
