@@ -73,6 +73,24 @@ def dash_home(request):
     cat=Category.objects.all()
     return render(request,"user/dash_home.html",{'cat':cat,'user':user})
 
+
+def dash_addbrand(request):
+    if request.method == 'POST':
+        form = BrandForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+            except:
+                return HttpResponse(request, 'Some error!')
+            return redirect('user/dash_home')
+    else:
+        form = BrandForm()
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    return render(request,"user/dash_addbrand.html",{'cat':cat,'user':user,'form':form})
+
+
 def logout(request):
     auth_logout(request)
     return home(request)

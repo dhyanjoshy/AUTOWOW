@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import Dealer
 
 #category model for bike and cars
 class Category(models.Model):
@@ -27,6 +28,7 @@ class Brand(models.Model):
 class Product(models.Model):
 
     product_id = models.AutoField(primary_key=True,unique=True)
+    dealer = models.ForeignKey(Dealer ,on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand,on_delete = models.CASCADE)
     category = models.ForeignKey(Category,on_delete = models.CASCADE)
     title = models.CharField(max_length = 100)

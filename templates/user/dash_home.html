@@ -3,20 +3,52 @@
     Dashboard:Home
 {% endblock %}
 {% block content %}
+<style>
+    .card{
+        padding:2rem;
+        border:none;
+        border-radius: 1rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        
+    }
+</style>
     <div class="container">
-        <div class="d-flex justify-content-between">
-            <div class="container">
-                <div class="containeralert alert-success">
-                    <h5>Welcome,</h5>
-                    <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <div class="card">
+            <div class="d-flex justify-content-between">
+                <div class="container">
+                    <div class="container">
+                        <h5>Welcome,</h5>
+                        <h2>{{user.first_name}} {{user.last_name}}</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="container">
-                <h6 class="paragraph">{{user.dealer.address_line1}}</h6>
-                <h6 class="paragraph">{{user.dealer.address_line2}}</h6>
-                <h6 class="paragraph">{{user.dealer.address_line3}}</h6>
+                <div class="container">
+                    <h6 class="paragraph">{{user.dealer.address_line1}}</h6>
+                    <h6 class="paragraph">{{user.dealer.address_line2}}</h6>
+                    <h6 class="paragraph">{{user.dealer.address_line3}}</h6>
+                </div>
             </div>
         </div>
     </div>
+    <br><br>
+        <div class="container">
+            <div class="card">
+                <p class="paragraph">
+                    We're excited to have you on board with us! As a dealer on Autowow, you have access to a vast network of car buyers who are actively searching for their next vehicle. By listing your cars on our platform, you'll be able to reach a larger audience and increase your chances of making a sale.<br>
+
+                    Here are some of the key benefits you can expect from using Autowow:
+                </p>
+                <ul>
+                    <li>Increased visibility: With thousands of visitors to our website every day, you'll have the opportunity to showcase your inventory to a broad audience.</li>
+                    <li>Improved customer reach: Our platform attracts car buyers from across the country, giving you access to a wider pool of potential customers.</li>
+                    <li>Easy to use: Our platform is designed to be user-friendly, making it easy for you to list your cars and manage your inventory.</li>
+                    <li>Cost-effective: We offer competitive pricing options that are affordable for dealers of all sizes.</li>
+                </ul>
+                <p class="paragraph">
+                    To get started, simply log in to your account and list your cars for sale. Our team is available to assist you with any questions you may have along the way.<br>
+                    Thank you for choosing Autowow as your car trading partner. We look forward to working with you!
+
+                </p>
+            </div>
+        </div>
     
 {% endblock %}

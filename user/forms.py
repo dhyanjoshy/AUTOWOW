@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from store.models import Brand,Product,Category
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
@@ -45,5 +46,26 @@ class DealerForm(forms.ModelForm):
     class Meta:
         model = Dealer
         fields = ('user','dealer','address_line1','address_line2','address_line3','location','phone_number1','phone_number2')
+
+
+class BrandForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['category'].required = True
+        self.fields['category'].widget.attrs['required'] = True
+        self.fields['category'].widget.attrs['class'] = 'input100'
+        self.fields['category'].widget.attrs['id'] = 'selectUser'
+        self.fields['category'].widget.choices = self.fields['category'].choices
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'title'})
+        self.fields['description'].widget = forms.Textarea(attrs={'class': 'input100', 'name': 'description'})
+        self.fields['logo'].widget = forms.ClearableFileInput(attrs={'class': 'input100', 'name': 'address_line3'})
+
+    class Meta:
+        model = Brand
+        fields = ('category', 'title', 'description', 'logo')
+
+
 
             
