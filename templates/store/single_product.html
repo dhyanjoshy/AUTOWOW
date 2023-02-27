@@ -153,15 +153,39 @@
               <img src="{% static 'assets/login/images/img-01.png' %}" alt="IMG">
             </div>
     
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" method="post">
+              {% csrf_token %}
               <span class="login100-form-title">
                 Need a call?
               </span>
+              <br>
+          {% if form.errors %}
+            <div class="container-fluid">
+              {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                  <div class="alert alert-danger">
+                    <p> {{field|title}} : {{ error }}</p>
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+            <br>
+              <!-- Firstname -->
+
+              <div class="wrap-input100 validate-input" id="hide">
+                {{form.dealer}}
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+              </div>
               
               <!-- Firstname -->
 
               <div class="wrap-input100 validate-input">
-                <input class="input100" type="text" name="fname" placeholder="Firstname">
+                {{form.fname}}
                 <span class="focus-input100"></span>
                 <span class="symbol-input100">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -170,7 +194,7 @@
               <!-- Lastname -->
 
               <div class="wrap-input100 validate-input">
-                <input class="input100" type="text" name="lname" placeholder="Lastname">
+                {{form.lname}}
                 <span class="focus-input100"></span>
                 <span class="symbol-input100">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -180,7 +204,7 @@
               <!-- email -->
 
               <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input class="input100" type="text" name="email" placeholder="Email">
+                {{form.email}}
                 <span class="focus-input100"></span>
                 <span class="symbol-input100">
                   <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -190,7 +214,7 @@
                <!-- email -->
 
                <div class="wrap-input100 validate-input" data-validate = "Phone Number">
-                <input class="input100" type="number" name="phone" placeholder="Phone">
+                {{form.phone_number}}
                 <span class="focus-input100"></span>
                 <span class="symbol-input100">
                   <i class="fa fa-phone" aria-hidden="true"></i>
@@ -216,6 +240,26 @@
     <script src="{% static 'assets/js/single_product.js' %}"></script>
 
 <!-- end  user information form -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+
+  var select=document.getElementById("selectItem");
+  var number="{{product.dealer.dealer_id}}"
+  var hide = document.getElementById("hide")
+
+  for (var i = select.options.length - 1; i >= 0; i--) {
+      var option = select.options[i];
+      if (option.value !== number) {
+          select.removeChild(option);
+        }
+        hide.style.visibility = "hidden";
+      
+    }
+    
+});
+
+</script>
 
 
 

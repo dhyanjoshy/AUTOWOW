@@ -23,7 +23,7 @@ class Customer(models.Model):
     fname=models.CharField(max_length=199)
     lname=models.CharField(max_length=199)
     phone_number = models.IntegerField()
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
 
 
     def __str__(self) :

@@ -1,0 +1,54 @@
+{% extends 'user/dashboard.html' %}
+{% block title %}
+    Dashboard:Home
+{% endblock %}
+{% block content %}
+<style>
+    .card{
+        padding:2rem;
+        border:none;
+        border-radius: 1rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        
+    }
+    a{
+        color:green;
+    }
+</style>
+    <div class="container">
+        <table class="table table-hover" id="my-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Numer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in customer %}
+                <tr>
+                    <td>1</td>
+                    <td>{{user.fname}}</td>
+                    <td>{{user.lname}}</td>
+                    <td>{{user.email}}</td>
+                    <td><a href="tel:{{user.phone_number}}">{{user.phone_number}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tableRows = document.querySelectorAll("#my-table tbody tr");
+            tableRows.forEach(function(row, index) {
+                var serialNumberCell = row.cells[0];
+                serialNumberCell.textContent = index + 1;
+            });
+        });
+    </script>
+    
+{% endblock %}

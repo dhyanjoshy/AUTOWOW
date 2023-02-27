@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from store.models import Brand,Product,Category
+from store.models import Brand,Product,Category,Color,Varient
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 
@@ -66,6 +66,70 @@ class BrandForm(forms.ModelForm):
         model = Brand
         fields = ('category', 'title', 'description', 'logo')
 
+class ProductForm(forms.ModelForm):
+    dealer = forms.ModelChoiceField(queryset=Dealer.objects.all())
+    brand = forms.ModelChoiceField(queryset=Brand.objects.all())
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['dealer'].required = True
+        self.fields['dealer'].widget.attrs['required'] = True
+        self.fields['dealer'].widget.attrs['class'] = 'input100'
+        self.fields['dealer'].widget.attrs['id'] = 'selectUser'
+        self.fields['dealer'].widget.choices = self.fields['dealer'].choices
+        
+        self.fields['brand'].required = True
+        self.fields['brand'].widget.attrs['required'] = True
+        self.fields['brand'].widget.attrs['class'] = 'input100'
+        self.fields['brand'].widget.choices = self.fields['brand'].choices
+
+        self.fields['category'].required = True
+        self.fields['category'].widget.attrs['required'] = True
+        self.fields['category'].widget.attrs['class'] = 'input100'
+        self.fields['category'].widget.choices = self.fields['category'].choices
+
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'title'})
+        self.fields['description'].widget = forms.Textarea(attrs={'class': 'input100', 'name': 'description'})
+        self.fields['image'].widget = forms.ClearableFileInput(attrs={'class': 'input100', 'name': 'image'})
+
+    class Meta:
+        model = Product
+        fields = ('dealer','category','brand', 'title', 'description', 'image')
+
+class ColorForm(forms.ModelForm):
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['product'].required = True
+        self.fields['product'].widget.attrs['required'] = True
+        self.fields['product'].widget.attrs['class'] = 'input100'
+        self.fields['product'].widget.attrs['id'] = 'selectUser'
+        self.fields['product'].widget.choices = self.fields['product'].choices
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'title'})
+        self.fields['image'].widget = forms.ClearableFileInput(attrs={'class': 'input100', 'name': 'address_line3'})
+
+    class Meta:
+        model = Color
+        fields = ('product', 'title', 'image')
+
+class VarientForm(forms.ModelForm):
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['product'].required = True
+        self.fields['product'].widget.attrs['required'] = True
+        self.fields['product'].widget.attrs['class'] = 'input100'
+        self.fields['product'].widget.attrs['id'] = 'selectUser'
+        self.fields['product'].widget.choices = self.fields['product'].choices
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'input100', 'name': 'title'})
+        self.fields['price'].widget = forms.NumberInput(attrs={'class': 'input100', 'name': 'address_line3'})
+
+    class Meta:
+        model = Varient
+        fields = ('product', 'title', 'price')
 
 
             

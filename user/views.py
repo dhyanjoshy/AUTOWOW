@@ -62,10 +62,12 @@ def dealerdetails(request):
 
 
 def dashboard(request):
-    username=request.user.username
-    user = get_object_or_404(User, username=username)
-    cat=Category.objects.all()
-    return render(request,"user/dashboard.html",{'cat':cat,'user':user})
+    if request.user.is_authenticated:
+        # User is logged in, redirect to dash_home
+        return redirect('user:dash_home')
+    else:
+        # User is not logged in, redirect to login
+        return redirect('user:login')
 
 def dash_home(request):
     username=request.user.username
@@ -76,19 +78,95 @@ def dash_home(request):
 
 def dash_addbrand(request):
     if request.method == 'POST':
-        form = BrandForm(request.POST)
+        form = BrandForm(request.POST,request.FILES)
         if form.is_valid():
             try:
                 form.save()
             except:
                 return HttpResponse(request, 'Some error!')
-            return redirect('user/dash_home')
+            return redirect('user:dash_home')
     else:
         form = BrandForm()
     username=request.user.username
     user = get_object_or_404(User, username=username)
     cat=Category.objects.all()
     return render(request,"user/dash_addbrand.html",{'cat':cat,'user':user,'form':form})
+
+def dash_addproduct(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST,request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+            except:
+                return HttpResponse(request, 'Some error!')
+            return redirect('user:dash_home')
+    else:
+        form = ProductForm()
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    return render(request,"user/dash_addproduct.html",{'cat':cat,'user':user,'form':form})
+
+def dash_urproduct(request):
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    dealer_id=user.dealer.dealer_id
+    product=Product.objects.filter(dealer__dealer_id=dealer_id)
+    return render(request,"user/dash_urproduct.html",{'cat':cat,'user':user,'product':product})
+
+def dash_single_product(request,product_id):
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    product=Product.objects.get(product_id=product_id)
+    color=Color.objects.filter(product__product_id=product_id)
+    varient=Varient.objects.filter(product__product_id=product_id)
+    return render(request,"user/dash_single_product.html",{'cat':cat,'user':user,'product':product,'color':color,'varient':varient})
+
+def dash_addcolor(request,product_id):
+    if request.method == 'POST':
+        form = ColorForm(request.POST,request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+            except:
+                return HttpResponse(request, 'Some error!')
+            return redirect('user:dash_home')
+    else:
+        form = ColorForm()
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    product=Product.objects.get(product_id=product_id)
+    return render(request,"user/dash_addcolor.html",{'cat':cat,'user':user,'form':form,'product':product})
+
+def dash_addvarient(request,product_id):
+    if request.method == 'POST':
+        form = VarientForm(request.POST,request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+            except:
+                return HttpResponse(request, 'Some error!')
+            return redirect('user:dash_home')
+    else:
+        form = VarientForm()
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    product=Product.objects.get(product_id=product_id)
+    return render(request,"user/dash_addvarient.html",{'cat':cat,'user':user,'form':form,'product':product})
+
+
+def dash_enquiries(request):
+    username=request.user.username
+    user = get_object_or_404(User, username=username)
+    cat=Category.objects.all()
+    dealer_id=user.dealer.dealer_id
+    customer=Customer.objects.filter(dealer__dealer_id=dealer_id)
+    return render(request,"user/dash_enquiries.html",{'cat':cat,'user':user,'customer':customer})
 
 
 def logout(request):

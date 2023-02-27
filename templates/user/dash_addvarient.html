@@ -1,7 +1,7 @@
-{% extends 'store/base.html' %}
+{% extends 'user/dashboard.html' %}
 {% load static %}
 {% block title %}
-  Dealer Login
+Autowow: Add varient
 {% endblock %}
 
 {% block content %}
@@ -40,50 +40,30 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-color:white;">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="POST">
+				<form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           
 					<span class="login100-form-title p-b-26">
-						Signup
+						Add Varient
 					</span>
 
           <br>
-					<div class="wrap-input100">
-						{{form.username}}
-						<span class="focus-input100" data-placeholder="Username"></span>
+					<div class="wrap-input100 " id ="hide">
+						{{form.product}}
+                        <span class="focus-input100" data-placeholder="Dealer"></span>
 					</div>
 
-          <div class="wrap-input100 validate-input" data-validate = "Please use valid format :abc@abc.abc">
-						{{form.email}}
-						<span class="focus-input100" data-placeholder="Email"></span>
+           <div class="wrap-input100 ">
+						{{form.title}}
+						<span class="focus-input100" data-placeholder="Varient Title"></span>
 					</div>
 
-          <div class="wrap-input100">
-						{{form.first_name}}
-						<span class="focus-input100" data-placeholder="Firstname"></span>
+            <div class="wrap-input100">
+						{{form.price}}
+						<span class="focus-input100" data-placeholder="Price"></span>
 					</div>
 
-          <div class="wrap-input100">
-						{{form.last_name}}
-						<span class="focus-input100" data-placeholder="Lastname"></span>
-					</div>
-
-					<div class="wrap-input100" >
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						{{form.password1}}
-						<span class="focus-input100" data-placeholder="Password"></span>
-					</div>
-
-
-          <div class="wrap-input100">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						{{form.password2}}
-						<span class="focus-input100" data-placeholder="Confirm Password"></span>
-					</div>
+           
 
           <br>
           {% if form.errors %}
@@ -103,20 +83,11 @@
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
-								Signup
+								Submit
 							</button>
 						</div>
 					</div>
 
-					<div class="text-center p-t-115">
-						<span class="txt1">
-							Already have an account?
-						</span>
-
-						<a class="txt2" href="{% url 'user:login' %}">
-							Login
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -142,5 +113,26 @@
 <!--===============================================================================================-->
 	<script src="{% static 'user/log_assets/js/main.js'%}"></script>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            var select=document.getElementById("selectUser");
+            var number="{{product.product_id}}"
+            var hide = document.getElementById("hide")
+            console.log("Views Id : " +number)
+
+            for (var i = select.options.length - 1; i >= 0; i--) {
+                var option = select.options[i];
+                if (option.value !== number) {
+                    select.removeChild(option);
+                  }
+                  hide.style.visibility = "hidden";
+                
+              }
+              
+        });
+    </script>
 </section>
 {% endblock %}

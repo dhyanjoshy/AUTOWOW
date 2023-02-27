@@ -1,0 +1,114 @@
+{% extends 'user/dashboard.html' %}
+{% load static %}
+{% block title %}
+AutoWow: Products
+{% endblock %}
+
+
+{% block content %}
+<head>
+    <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Open+Sans&family=Poppins:ital,wght@0,200;0,600;1,100;1,200&family=Raleway:wght@300&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<style>
+  .card{
+    border: none;
+    border-radius: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition: .5s;
+  }
+  .card:hover{
+    box-shadow: #ffbc4879 0px 7px 29px 0px;
+  }
+  .card h5{
+    font-family: "Poppins";
+  }
+  .image{
+    padding:20px;
+    border-radius: 40px;
+    height:auto;
+    object-fit: contain;
+  }
+  .text-card{
+    padding:20px;
+  }
+  .anc{
+    text-decoration: none;
+    color: rgb(152, 152, 152);
+    transition: .2s;
+  }
+  .anc:hover{
+      color:black;
+  }
+  .arrow-down{
+    animation-name: arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  @keyframes arrow {
+    0%,100%   {transform: translateY(0px);}
+    50%  {transform: translateY(30px);}
+  }
+</style>
+
+<section id="products" class="d-flex flex-column justify-content-center">
+    <div class="container">
+        <h2>Products</h2><br>
+      </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-4 g-4">
+          {% for item in product %}
+          <a class="anc" href="{% url 'user:dash_single_product' item.product_id %}">
+            <div class="col">
+              <div class="card">
+                <img src="{{ item.image.url }}" class="card-img-top image"
+                  alt="{{item.image}}" />
+                <div class="card-body text-card">
+                  <h5 class="card-title">{{item.title}}</h5><br>
+                  <h6 class="card-title">Brand :{{item.brand}}</h6>
+                  <p class="card-text">
+                    {{item.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+            {% endfor %}
+          </div>
+    </div>
+</section>
+
+ <!-- Vendor JS Files -->
+ <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+ <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+ <!-- Template Main JS File -->
+ <script src="{% static 'assets/js/main.js' %}"></script>
+{% endblock %}
