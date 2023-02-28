@@ -51,7 +51,7 @@ def dealerdetails(request):
                 form.save()
             except:
                 return HttpResponse(request, 'Some error!')
-            return redirect('/user/login')
+            return redirect('user:dash_home')
     else:
         form = DealerForm()
 
